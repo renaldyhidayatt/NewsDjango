@@ -1,0 +1,34 @@
+{% extends 'auth/base_auth.html' %} {% block title %}{{ home }}{% endblock %} 
+{% block content %}
+<div class="p-5">
+  <div class="text-center">
+    <h1 class="h4 text-gray-900 mb-4">Welcome to user</h1>
+  </div>
+  <form action="{% url 'login' %}" method="POST" class="user">
+    {% csrf_token %} {% include "partials/_messages.html" %} 
+    <div class="form-group">
+      <input type="email" class="form-control form-control-user" placeholder="Email" name="email" id="email"/>
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control form-control-user" placeholder="Password" name="password" id="password"/>
+    </div>
+    <button type="submit" class="btn btn-primary btn-user btn-block">
+      Register Account
+    </button>
+    <hr />
+    <a href="index.html" class="btn btn-google btn-user btn-block">
+      <i class="fab fa-google fa-fw"></i> Register with Google
+    </a>
+    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+      <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+    </a>
+  </form>
+  <hr />
+  <div class="text-center">
+    <a class="small" href="forgot-password.html">Forgot Password?</a>
+  </div>
+  <div class="text-center">
+    <a class="small" href="login.html">Already have an account? Login!</a>
+  </div>
+</div>
+{% endblock %}

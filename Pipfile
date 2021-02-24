@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+black = "*"
+pillow = "*"
+validate-email = "*"
+six = "*"
+psycopg2-binary = "*"
+xlwt = "*"
+django-crontab = "*"
+qrcode = "*"
+django-ipware = "*"
+ip2geotools = "*"
+django-qr-code = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

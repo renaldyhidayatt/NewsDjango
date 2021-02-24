@@ -1,0 +1,120 @@
+{% extends 'adminpanel/base_admin.html' %} {% load static %} 
+{% block addjavascript %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+<script>
+  CKEDITOR.replace("txt");
+</script>
+{% endblock %} {% block content %}
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="#"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item"><a href="#">Setting WebSite</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Setting Website
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <a href="{% url 'export_cat_csv' %}" class="btn btn-sm btn-neutral"
+            >Export Csv</a
+          >
+          <button
+            class="btn btn-sm btn-neutral"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Import Csv
+          </button>
+          <!-- <a href="#" class="btn btn-sm btn-neutral">Import Csv</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        {% include "partials/_messages.html" %}
+        <div class="card-header border-0">
+          <h3 class="mb-0">About Setting Website</h3>
+        </div>
+        <div class="card-body">
+          <form action="{% url 'site_setting' %}" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label class="form-control-label">Name</label>
+              <input type="text" class="form-control" value="{{site.name}}" name="name" id="name" />
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Tell</label>
+              <input type="text" class="form-control" value="{{site.tell}}" name="tell" id="tell"/>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Fb</label>
+              <input type="text" class="form-control" value="{{site.fb}}" name="fb" id="fb"/>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Tw</label>
+              <input type="text" class="form-control" value="{{site.tw}}" name="tw" id="tw"/>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">yt</label>
+              <input type="text" class="form-control" value="{{site.yt}}" name="yt" id="yt"/>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Link</label>
+              <input type="text" class="form-control" value="{{site.link}}" name="link" id="link"/>
+            </div>
+           
+            <div class="form-group">
+              <label class="form-control-label">Logo 1</label>
+              <input type="file" class="form-control" name="myfile" id="myfile"/>
+            </div>
+            <div class="form-group">
+              <!-- <label class="form-control-label">Logo 1</label> -->
+              <img src="{{site.picurl}}" class="rounded mx-auto d-block" alt="">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Logo 2</label>
+              <input type="file" class="form-control" name="myfile2" id="myfile"/>
+            </div>
+            <div class="form-group">
+              <!-- <label class="form-control-label">Logo 1</label> -->
+              <img src="{{site.picurl2}}" class="rounded mx-auto d-block" alt="">
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" for="input-username"
+                >About</label
+              >
+              <textarea
+                class="form-control"
+                rows="5"
+                name="txt"
+                id="txt"
+                placeholder="Text About Your Website"
+                >{{ site.about }}</textarea
+              >
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

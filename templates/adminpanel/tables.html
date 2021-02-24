@@ -1,0 +1,156 @@
+{% extends 'adminpanel/base_admin.html' %} 
+{% load static %}
+{% block content %}
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Tables</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <a href="#"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item"><a href="#">Users</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Create Users & List User</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <a href="#" class="btn btn-sm btn-neutral">New</a>
+          <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Create User</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label class="form-control-label" for="input-username">Username</label>
+              <input
+                type="text"
+                id="input-username"
+                class="form-control"
+                placeholder="Username"
+                value="lucky.jesse"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" for="input-username">Username</label>
+              <input
+                type="text"
+                id="input-username"
+                class="form-control"
+                placeholder="Username"
+                value="lucky.jesse"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" for="input-username">Username</label>
+              <input
+                type="text"
+                id="input-username"
+                class="form-control"
+                placeholder="Username"
+                value="lucky.jesse"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+          <h3 class="mb-0">Light table</h3>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="sort" data-sort="no">No</th>
+                <th scope="col" class="sort" data-sort="email">Email</th>
+                <th scope="col" class="sort" data-sort="name">First Name</th>
+                <th scope="col" class="sort" data-sort="name">Last Name</th>
+                <th scope="col" class="sort" data-sort="budget">Gender</th>
+                <th scope="col" class="sort" data-sort="status">Profile</th>
+                <th scope="col" class="sort" data-sort="completion">
+                  Action
+                </th>
+              </tr>
+            </thead>
+            <tbody class="list">
+              {% for user in page_obj %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.gender}}</td>
+                {% if user.profile_pic %}
+                  <td>
+                    <img src="{{user.profile_pic.url}}" class="avatar rounded-circle mr-3" alt="">
+                  </td>
+                {% endif %}
+                <td class="text-right">
+                  <div class="dropdown">
+                    <a
+                      class="btn btn-sm btn-icon-only text-light"
+                      href="#"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"
+                    >
+                      <a class="dropdown-item" href="edit">Edit</a>
+                      <a class="dropdown-item" href="delete">Delete</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- Card footer -->
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            <ul class="pagination align-right float-right mr-auto">
+              {% if page_obj.has_previous %}
+                <li {% if page_obj.number == 1 %} class="page-item" {% endif %}><a class="page-link" href="?page=1">&laquo; 1</a></li>
+                <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+
+                    Previous</a></li>
+              {% endif %}
+
+      {% if page_obj.has_next %}
+        <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
+      {% endif %}
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
